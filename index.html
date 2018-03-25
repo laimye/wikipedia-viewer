@@ -8,16 +8,16 @@
   <title>Wikipedia Viewer</title>
 </head>
 <body>
-  <div class="container mt-2">
+  <div id="app" class="container mt-2">
     <form>
       <div class="form-group">
         <label for="userInput">Search Wikipedia</label>
         <input type="text" class="form-control" placeholder="Type in here your inquiry">
       </div>
       <button type="submit" class="btn btn-primary">Search</button>
-      <buton class="btn btn-outline-success float-right">Search Random</buton>                  
+      <a href="https://en.wikipedia.org/wiki/Special:Random" target="blank" class="btn btn-outline-success float-right" style="text-decoration: none">Search Random Article</a>            
     </form>
   </div>
-  
+  <script src="app.js"></script>  
 </body>
 </html>
