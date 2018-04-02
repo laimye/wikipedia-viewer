@@ -55,7 +55,6 @@ function createElement(tagName, attributes, children) {
   var newElement = document.createElement(tagName);
   if (children[0] instanceof Object) {
     for (var i = 0; i < children.length; i++) {
-      console.log(children[i][2]);
       createElement(children[i][0], children[i][1], children[i][2]);
     }
   } else {
