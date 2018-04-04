@@ -39,30 +39,35 @@ function formatArticles (rawArticles) {
 }
 
 function displayArticles(articles) {
-  for(var i = articles.length-1; i >= 0; i--) {
-    createElement('div', { class: 'card-body mx-5' }, [
-      ['h5', { class: 'card-title' }, [articles[i].header]], 
-      ['p', { class: 'card-text' }, [articles[i].description]], 
-      ['a', { href: articles[i].link, class: 'btn btn-secondary', target: 'blank' }, ['Learn More']]
-    ])
+  for (var i = 0; i < articles.length; i++) {
+    var $article = renderArticle(articles[i]);
+    document.getElementById('search-results').appendChild($article);
   }
 }
 
+function renderArticle(article) {
+  var $article = 
+    createElement('div', { class: 'card my-4' }, [
+      createElement('h5', { class: 'card-title', style: 'padding: 10px' }, [article.header]),
+      createElement('p', { class: 'card-text', style: 'padding: 5px 10px' }, [article.description]), 
+      createElement('a', { href: article.link, class: 'btn btn-secondary', target: 'blank' }, ['Learn More'])
+    ]);
+  return $article;
+}
+
 function createElement(tagName, attributes, children) {
-  var newCard = document.createElement('div');
-  newCard.setAttribute('class', 'card my-2');
-  document.getElementById('search-results').appendChild(newCard);  
-  var newElement = document.createElement(tagName);
-  if (children[0] instanceof Object) {
-    for (var i = 0; i < children.length; i++) {
-      createElement(children[i][0], children[i][1], children[i][2]);
-    }
-  } else {
-    var newContent = document.createTextNode(children);
-    newElement.appendChild(newContent);
-    newCard.appendChild(newElement);
-    for (var attr in attributes) {
-      newElement.setAttribute(attr, attributes[attr]);
+  var $newElement = document.createElement(tagName);
+  for (var attr in attributes) {
+    $newElement.setAttribute(attr, attributes[attr]);
+  }
+  for (var i = 0; i < children.length; i++) {
+    if (children[i] instanceof Node) {
+        $newElement.appendChild(children[i]);
+    } else {
+      var text = document.createTextNode(children[i]);
+      $newElement.appendChild(text);
     }
   }
+  return $newElement;
 }
+
