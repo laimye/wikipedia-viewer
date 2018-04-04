@@ -43,6 +43,19 @@ function displayArticles(articles) {
     var $article = renderArticle(articles[i]);
     document.getElementById('search-results').appendChild($article);
   }
+  return $article;
+}
+
+function renderArticle(article) {
+  var $article =
+    createElement('div', { class: 'card my-3' }, [
+      createElement('div', { class: 'card-body' }, [
+        createElement('h5', { class: 'card-title' }, [article.header]),
+        createElement('p', { class: 'card-text' }, [article.description]),
+        createElement('a', { href: article.link, class: 'btn btn-outline-success', target: 'blank' }, ['Learn More']),
+      ])
+    ]);
+  return $article;
 }
 
 function renderArticle(article) {
@@ -56,18 +69,18 @@ function renderArticle(article) {
 }
 
 function createElement(tagName, attributes, children) {
-  var $newElement = document.createElement(tagName);
+  var $element = document.createElement(tagName);
   for (var attr in attributes) {
-    $newElement.setAttribute(attr, attributes[attr]);
+    $element.setAttribute(attr, attributes[attr])
   }
   for (var i = 0; i < children.length; i++) {
     if (children[i] instanceof Node) {
-        $newElement.appendChild(children[i]);
+      $element.appendChild(children[i]);
     } else {
-      var text = document.createTextNode(children[i]);
-      $newElement.appendChild(text);
+      var $text = document.createTextNode(children[i]);
+      $element.appendChild($text);
     }
   }
-  return $newElement;
+  return $element;
 }
 
