@@ -58,6 +58,16 @@ function renderArticle(article) {
   return $article;
 }
 
+function renderArticle(article) {
+  var $article = 
+    createElement('div', { class: 'card my-4' }, [
+      createElement('h5', { class: 'card-title', style: 'padding: 10px' }, [article.header]),
+      createElement('p', { class: 'card-text', style: 'padding: 5px 10px' }, [article.description]), 
+      createElement('a', { href: article.link, class: 'btn btn-secondary', target: 'blank' }, ['Learn More'])
+    ]);
+  return $article;
+}
+
 function createElement(tagName, attributes, children) {
   var $element = document.createElement(tagName);
   for (var attr in attributes) {
@@ -73,3 +83,4 @@ function createElement(tagName, attributes, children) {
   }
   return $element;
 }
+
